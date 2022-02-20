@@ -34,17 +34,26 @@ namespace DriveManager
             CountNumOfFoldersAndFiles(); //   Вызов метода подчета количества папок и файлов
 
             Console.ReadKey();
+
+            //CreateCatalog(); //   Создаем каталог
+
+            //Console.ReadKey();
         }
 
         static void CountNumOfFoldersAndFiles()
         {
             try
             {
-                DirectoryInfo dirInfo = new DirectoryInfo(@"C:\");
+                DirectoryInfo dirInfo = new DirectoryInfo(@"E:\\");
                 if (dirInfo.Exists)
                 {
                     Console.WriteLine(dirInfo.GetDirectories().Length + dirInfo.GetFiles().Length);
                 }
+                DirectoryInfo newDirectory = new DirectoryInfo(@"E:\Личная папка");
+                if (!newDirectory.Exists)
+                    newDirectory.Create();
+
+                newDirectory.CreateSubdirectory("Просто папка");
             }
             catch (Exception e)
             {
@@ -53,7 +62,7 @@ namespace DriveManager
         }
         static void GetCatalogs()
         {
-            string dirName = @"C:\"; // Прописываем путь к корневой директории MacOS (для Windows скорее всего тут будет "C:\\")
+            string dirName = @"E:\"; // Прописываем путь к корневой директории MacOS (для Windows скорее всего тут будет "C:\\")
             if (Directory.Exists(dirName)) // Проверим, что директория существует
             {
                 Console.WriteLine("Папки:");
@@ -70,5 +79,14 @@ namespace DriveManager
                     Console.WriteLine(s);
             }
         }
+
+        //static void CreateCatalog()        
+        //{
+        //    DirectoryInfo dirInfo = new DirectoryInfo(@"E:");
+        //    if (!dirInfo.Exists)
+        //        dirInfo.Create();
+
+        //    //dirInfo.CreateSubdirectory("NewFolder");
+        //}
     }
 }
